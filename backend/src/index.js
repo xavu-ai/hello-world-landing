@@ -1,10 +1,12 @@
 // Entry point for production startup
+// Use: npm start
 const app = require('./server');
 
-app.listen(process.env.PORT || 3000, () => {
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
   console.log('Hello World Landing Backend starting...');
-  console.log(`Server running on port ${process.env.PORT || 3000}`);
+  console.log(`Server running on port ${PORT}`);
 });
 
-// Export app for testing
 module.exports = app;
