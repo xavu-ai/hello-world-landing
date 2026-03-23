@@ -7,7 +7,40 @@ const config: Config = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
+        muted: {
+          DEFAULT: 'var(--muted)',
+          foreground: 'var(--muted-foreground)',
+        },
+        primary: {
+          DEFAULT: 'var(--primary)',
+          foreground: 'var(--primary-foreground)',
+        },
+        destructive: 'hsl(0 84.2% 60.2%)',
+        border: 'var(--border)',
+        ring: 'var(--ring)',
+      },
+      fontFamily: {
+        sans: ['var(--font-inter)'],
+      },
+      animation: {
+        'fade-in': 'fadeIn 0.5s ease-out',
+        'slide-in-from-bottom-4': 'slideInFromBottom 0.5s ease-out',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideInFromBottom: {
+          '0%': { transform: 'translateY(1rem)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+      },
+    },
   },
   plugins: [],
 };
