@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { fadeIn } from '@/lib/animations';
 
 export const metadata: Metadata = {
   title: 'Hello World',
