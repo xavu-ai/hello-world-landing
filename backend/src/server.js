@@ -8,7 +8,9 @@ const PORT = process.env.PORT || 3000;
 // Path traversal protection via express.static options
 app.use(express.static(path.join(__dirname, '../public'), {
   dotfiles: 'ignore',
-  index: ['index.html']
+  index: ['index.html'],
+  etag: true,
+  maxAge: '1d'
 }));
 
 // Explicit root route handler (ensures / returns index.html)

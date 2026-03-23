@@ -1,24 +1,24 @@
 # Stage 1: Build
-FROM node:20-alpine AS builder
+FROM node:22-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci --only=production
+RUN npm ci
 
 # Stage 2: Runtime
-FROM node:20-alpine AS runtime
+FROM node:22-alpine AS runtime
 WORKDIR /app
 
 # Non-root user
 RUN addgroup -g 1001 -S nodejs && \
-    adduser -S nodeapp -u 1001
+    adduser -S nodejs -u 1001
 
-COPY --from=builder /app/node_modules ./node_modules
-COPY --chown=nodeapp:nodejs . .
+COPY --from=builder --chown=nodejs:nodejs /app/node_modules ./node_modules
+COPY --from=builder --chown=nodejs:nodejs . .
 
-USER nodeapp
+USER nodejs
 EXPOSE 3000
 
 ENV NODE_ENV=production
 ENV PORT=3000
 
-CMD ["node", "src/index.js"]
+CMD ["node", "src/server.js"]

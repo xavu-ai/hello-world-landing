@@ -28,4 +28,16 @@ describe('Static File Integration Tests', () => {
       expect(res.text).toContain('Page Not Found');
     });
   });
+
+  describe('Security', () => {
+    test('path traversal attack returns 404', async () => {
+      const res = await request(app).get('/../../../etc/passwd');
+      expect(res.status).toBe(404);
+    });
+
+    test('encoded path traversal returns 404', async () => {
+      const res = await request(app).get('/%2e%2e/%2e%2e/%2e%2e/etc/passwd');
+      expect(res.status).toBe(404);
+    });
+  });
 });
